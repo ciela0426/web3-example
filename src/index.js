@@ -2,8 +2,11 @@ import { StrictMode } from "react";
 import ReactDOM from 'react-dom';
 import { Web3ReactProvider } from '@web3-react/core';
 import { ethers } from "ethers";
+import { Buffer } from 'buffer';
 
 import App from './App';
+
+window.Buffer = window.Buffer || Buffer;
 
 const getLibrary = (provider) => {
   const library = new ethers.providers.Web3Provider(provider);

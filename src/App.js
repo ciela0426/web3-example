@@ -36,7 +36,7 @@ const ModalWallet = ({modalOpen, setModalOpen}) => {
   };
 
   const handleConnectWallet = () => {
-    activate(connectors.walletConnect);
+    activate(connectors.walletconnect);
     setProvider("walletConnect");
     setModalOpen(false);
   };
@@ -69,7 +69,7 @@ const ModalWallet = ({modalOpen, setModalOpen}) => {
 
 const App = () => {
 
-  const { chainId, account, activate, deactivate, active } = useWeb3React();
+  const { chainId, account, deactivate, active } = useWeb3React();
 
   const [modalOpen, setModalOpen] = useState(false);
 
