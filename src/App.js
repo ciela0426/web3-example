@@ -89,7 +89,8 @@ const App = () => {
 
   return (
     <div id="component">
-      <p className="account">{`Account: ${truncateAddress(account)}`}</p>
+      <p className="account">{`Account: ${account ? account : "No Account"}`}</p>
+      <p className="account">{`Account for short: ${truncateAddress(account)}`}</p>
       <p className="network">{`Network ID: ${chainId ? chainId : "No Network"}`}</p>
         {active ? (
           <div
