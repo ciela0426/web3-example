@@ -24,7 +24,6 @@
     font-size: 20px;
     font-weight: 700;
 }
-
 .wallet_connect::after,
 .metamask::after {
     position: absolute;
@@ -37,12 +36,10 @@
     background: url(../imgs/wallet_connect.svg) no-repeat 50% 50%;
     background-size: contain;
 }
-
 .metamask::after {
     background: url(../imgs/metamask.png) no-repeat 50% 50%;
     background-size: contain;
 }
-
 .wallet_connect:hover,
 .metamask:hover {
     background: #eee;
@@ -55,6 +52,9 @@
 .metamask:hover  {
     border-radius: 0 0 20px 20px;
     color: #f38218;
+}
+.wallet_connect.mobile {
+    border-radius: 20px;
 }
 
 .connect_wallet_button {

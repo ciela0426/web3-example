@@ -1,5 +1,4 @@
 import { useWeb3React } from '@web3-react/core';
-
 import { connectors } from "../connector/Connectors";
 
 const useWeb3 = () => {
@@ -8,6 +7,7 @@ const useWeb3 = () => {
   const connect = async (type) => {
     try {
       if (type === 'metamask') {
+        //
         await changeToBinanceChain();
         await activate(connectors.injected);
       } else {

@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useWeb3React } from "@web3-react/core";
+import { isMobile } from 'react-device-detect';
+
 
 import { connectors } from "./connector/connectors";
 import { truncateAddress } from "./assets/utils/utils";
@@ -14,14 +16,12 @@ export const isNoEthereumObject = (err) => {
   return NO_ETHEREUM_OBJECT.test(err);
 };
 
+// Wallet 선택을 위한 Modal Component
 const ModalWallet = ({modalOpen, setModalOpen}) => {
 
   const { active, activate, deactivate } = useWeb3React();
 
-  const setProvider = (type) => {
-    window.localStorage.setItem("provider", type);
-  };
-
+  // metamask 연결
   const handleConnect = () => {
     if (active) {
       deactivate();
@@ -31,13 +31,12 @@ const ModalWallet = ({modalOpen, setModalOpen}) => {
       if (isNoEthereumObject(error))
         window.open("https://metamask.io/download.html");
     });
-    setProvider("walletConnect");
     setModalOpen(false);
   };
 
+  // walletconnect 연결
   const handleConnectWallet = () => {
     activate(connectors.walletconnect);
-    setProvider("walletConnect");
     setModalOpen(false);
   };
 
@@ -51,17 +50,20 @@ const ModalWallet = ({modalOpen, setModalOpen}) => {
           }}
         ></div>
         <div
-          className='wallet_connect'
+          className={isMobile ? 'wallet_connect mobile' : 'wallet_connect'}
           onClick={handleConnectWallet}
         >
           wallet connect
         </div>
-        <div
-          className='metamask'
-          onClick={handleConnect}
-        >
-          metamask
-        </div>
+        {isMobile 
+          ? null
+          : <div
+              className='metamask'
+              onClick={handleConnect}
+            >
+              metamask
+            </div>
+        }
       </div>
     </div>
   );
@@ -73,19 +75,9 @@ const App = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const refreshState = () => {
-    window.localStorage.setItem("provider", undefined);
-  };
-
   const disconnect = () => {
-    refreshState();
     deactivate();
   };
-
-  useEffect(() => {
-    // const provider = window.localStorage.getItem("provider");
-    // if (provider) activate(connectors[provider]);
-  }, []);
 
   return (
     <div id="component">
